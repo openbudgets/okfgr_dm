@@ -6,7 +6,7 @@ A Python wrapper to access OKFGR data-mining server
 $ git clone https://github.com/openbudgets/okfgr_dm.git
 $ cd okfgr_dm
 okfgr_dm $ source venv/bin/activate
-(venv) okfgr_dm $ make init
+(venv) okfgr_dm $ pip3 install .
 ```
 
 # Run test
