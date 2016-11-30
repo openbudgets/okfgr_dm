@@ -28,7 +28,7 @@ $ iPython
 In [1]: import okfgr_dm
 In [2]: okfgr_dm.dm_okfgr("/ocpu/library/OBeU/R/ts.obeu", tsdata="Athens_draft_ts", prediction_steps=4)
 ```
-You shall see data-mining results from UEP server as follows:
+You shall see data-mining results from OKFGR server as follows:
 ```
 ['curl', '-d', 'prediction_steps=4', '-d', 'tsdata=Athens_draft_ts', 'http://okfnrg.math.auth.gr/ocpu/library/OBeU/R/ts.obeu']
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
