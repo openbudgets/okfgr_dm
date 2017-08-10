@@ -1,20 +1,42 @@
 import subprocess
+import requests
+import json
+import urllib3
 
-
-def dm_okfgr(endpoint, OK_GREECE_ROOT="http://okfnrg.math.auth.gr", **kwargs):
+def dm_okfgr(endpoint, OKFGR_SERVER="okfnrg.math.auth.gr", **kwargs):
     """
     :param endpoint: data-mining service endpoint
     :param kwargs: parameters for a data-mining function
     :return: the string-format of a json structure
     """
-    arglst = []
-    for k in kwargs.keys():
-        arglst += ["-d", str(k)+"="+str(kwargs[k])]
-    cmd = ['curl'] + arglst + [OK_GREECE_ROOT+endpoint]
-    print(cmd)
-    res = subprocess.check_output(cmd).decode("utf-8")
-    result_endpoint = res.split('\n')[0]
-    result = subprocess.check_output(['curl', OK_GREECE_ROOT+result_endpoint+'/print']).decode("utf-8")
-    print(result)
-    return result
+
+    json_data = kwargs['json_data']
+    amount = kwargs['amount']
+    time = kwargs['time']
+    prediction_steps = kwargs['prediction_steps']
+
+
+    import http.client
+
+    conn = http.client.HTTPConnection(OKFGR_SERVER)
+
+    payload = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"json_data\"\r\n\r\n'"+\
+              json_data+"'\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"time\"\r\n\r\n'"+\
+              time+"'\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"amount\"\r\n\r\n'"+\
+              amount+"'\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"prediction_steps\"\r\n\r\n"+ \
+              str(prediction_steps)+"\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
+
+    headers = {
+        'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        'cache-control': "no-cache",
+    }
+
+    conn.request("POST", endpoint, payload, headers)
+
+    res = conn.getresponse()
+    data = res.read()
+
+    print(data.decode("utf-8"))
+
+    return data.decode("utf-8")
 
