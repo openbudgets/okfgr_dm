@@ -1,8 +1,3 @@
-import subprocess
-import requests
-import json
-import urllib3
-
 def dm_okfgr(endpoint, OKFGR_SERVER="okfnrg.math.auth.gr", **kwargs):
     """
     :param endpoint: data-mining service endpoint
