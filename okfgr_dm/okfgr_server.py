@@ -21,12 +21,7 @@ def dm_okfgr(endpoint, OKFGR_SERVER="okfnrg.math.auth.gr", **kwargs):
                   amount+"'\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"prediction_steps\"\r\n\r\n"+ \
                   str(prediction_steps)+"\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
 
-        headers = {
-            'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-            'cache-control': "no-cache",
-        }
 
-        conn.request("POST", endpoint+"/print", payload, headers)
 
     else:
         json_data = kwargs['json_data']
@@ -46,12 +41,15 @@ def dm_okfgr(endpoint, OKFGR_SERVER="okfnrg.math.auth.gr", **kwargs):
         headers = {
             'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
             'cache-control': "no-cache",
-            'postman-token': "04cfd441-96ed-759d-f69a-0e9d64735e8d"
         }
 
-        #conn.request("POST", "/ocpu/library/DescriptiveStats.OBeu/R/open_spending.ds/print", payload, headers)
-        #print(endpoint)
-        conn.request("POST", endpoint+"/print", payload, headers)
+
+    headers = {
+        'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        'cache-control': "no-cache",
+    }
+
+    conn.request("POST", endpoint+"/print", payload, headers)
     res = conn.getresponse()
     data = res.read()
 
