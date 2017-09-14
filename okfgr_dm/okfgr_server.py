@@ -1,7 +1,7 @@
 import http.client
 import subprocess
 
-def dm_okfgr(endpoint, OKFGR_SERVER="apps.openbudgets.eu", **kwargs):
+def dm_okfgr(endpoint, OKFGR_SERVER="okfnrg.math.auth.gr", **kwargs):
     """
     :param endpoint: data-mining service endpoint
     :param kwargs: parameters for a data-mining function
