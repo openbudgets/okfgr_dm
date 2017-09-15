@@ -1,7 +1,7 @@
 import http.client
 import subprocess
 
-def dm_okfgr(endpoint, OKFGR_SERVER="okfnrg.math.auth.gr", **kwargs):
+def dm_okfgr(endpoint, OKFGR_SERVER="http://localhost:8666/", **kwargs):
     """
     :param endpoint: data-mining service endpoint
     :param kwargs: parameters for a data-mining function
